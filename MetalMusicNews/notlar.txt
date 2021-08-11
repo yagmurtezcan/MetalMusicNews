@@ -1,0 +1,100 @@
+oncelikle masaüstünde projenin klasörünü açtık ve vs code içine attık.
+ https://reactnative.dev/docs/environment-setup doc içersiinden React native CLI QuickStart tabına geçtik. ve cihaz özelliklerini seçerek kuruluma basladık.
+terminali açtık Creating a new application baslığı altında yer alan npx react-native init AwesomeProject kutuphanesini terminalden yükledik.
+
+biz 'npx react-native init MetalMusicNews' (proje oluşturma kodu) yazdık altına metal MetalMusicNews klasörün oluşturulurdu.
+cd MetalMusicNews ile klasörün içine girdik.
+npx react-native start ile projeyi ayağa kaldırdık.
+https://reactnative.dev/docs/environment-setup sitesinde önerilen Step 2: Start your application baslığı altındaki npx react-native run-ios 
+
+iosta ios klasörün içinde podfile diye bi sey var. flipper kısmını yorum satırına alıyosun.
+
+cd ile MetalMusicNews içine girersin.
+cd ios ile ios klasörün içine giriyorsun. termianalde.
+flipper yorum satırına alınır.
+terminale pod install denir.
+
+ben de cocoapods yüklü olmadığı için build alınamıyor.
+
+bunları yükledikten sonra navigation kullanacağım içn https://reactnavigation.org/docs/getting-started getting start ekranından 
+1) npm install @react-navigation/native paketini yükleriz. terminalden sonra
+2) npm install react-native-screens react-native-safe-area-context yükleriz.
+3) https://reactnavigation.org/docs/hello-react-navigation ekranından alınan npm install @react-navigation/native-stack paketini de yükleriz.
+
+hata alırsan 31.07.2021 deki video 1.55 den itibaren izleyebilirsin. 2 kez run ios metodunu cağırdık stack ekledik ikinci denemede geldi.
+
+alta tab menü koyacağım için https://reactnavigation.org/docs/tab-based-navigation linkindeki 
+4) npm install @react-navigation/bottom-tabs yükleriz terminalden.
+
+
+deneme olarak https://reactnavigation.org/docs/hello-react-navigation linkindeki ilk örneği kopyalayıp app.js içerisine yapıştırdık. 
+
+// In App.js in a new project
+
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './screens/HomeScreen'; // bunu eklemek için de HomeScreen yazarsın gelene tıklarsın v e 7. satır otomatik gelir.
+
+function HomeScreen() {   // burayı sildik.
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default App;
+
+
+buranın son importundan sonra kendi ekranımız olan HomeScreen i import olarak ekledik 
+
+4. adımda yüklediğimiz npm install @react-navigation/bottom-tabs paketi için normalde 
+app.js içerisindeki importu kendimiz eklememiz gerekiyordu
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+bunu ekledikten sonra o importu const Stack = createNativeStackNavigator(); kodu ile tetiklersin. 
+zaten createNativeStackNavigator(); demek sana altta bi tab oluşturdum sen onu kullan demek.
+sonra app.js içerisinnde container icine gidip Tab.Screen lerini oluşturursun. yani aşağıdaki yapıyı (bunu kendine göre özelleştirirsin.)
+
+ <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+
+
+      function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen>
+        <Tab.Screen name="Contact" component={ContactScreen}></Tab.Screen>
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
+olarak yazdık.
+
+sonra screens klasörü içine bütün ekranlarımı ekledim ve sonra gidip app.js içerisine NavigationContainer içine ekledik.
+
+
+github a atma:
+
+https://github.com/yagmurtezcan?tab=repositories 
+2) repositories > new > repository name : MetalMusicNews > create repositories
+3) vs code terminale  gel > git init > git add > git commit -m "project init"
+4) gitte tarif edilen yerden remote olan satırı al > git remote origin http://github.com/yakintech/MetalMusicNews.git
+5) git push origin master
